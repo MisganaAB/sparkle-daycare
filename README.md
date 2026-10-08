@@ -331,7 +331,27 @@ Build and deploy to any static host (Vercel, Netlify, Cloudflare Pages):
 npm run build
 ```
 
-Update `VITE_API_URL` to your production backend URL.
+#### Deploy the frontend to Vercel
+
+1. Import the repository in Vercel and set **Root Directory** to `frontend`.
+2. Use the Vite defaults:
+   - Build command: `npm run build`
+   - Output directory: `dist`
+   - Install command: `npm install`
+3. Add these environment variables in the Vercel project settings for every environment you deploy (Production, Preview, and Development):
+   - `VITE_API_URL`: production backend origin, for example `https://your-api.onrender.com` (no trailing slash)
+   - `VITE_SUPABASE_URL`: Supabase project URL, for example `https://your-project-ref.supabase.co`
+   - `VITE_SUPABASE_ANON_KEY`: Supabase publishable/anon key
+4. In the backend host settings, set `FRONTEND_URL` to the exact deployed Vercel origin, such as `https://your-project.vercel.app`. The backend CORS configuration allows this origin.
+5. In Supabase **Authentication → URL Configuration**, set **Site URL** to the production frontend origin and add it to the allowed redirect URLs. Add any Vercel preview origins that need to use email-based auth flows.
+6. Redeploy after changing environment variables; Vite embeds `VITE_` values at build time.
+
+`frontend/vercel.json` rewrites application paths to the SPA entry point so refreshing or opening a direct URL works on Vercel. React Router keeps the requested path, and the app enforces these admin routes:
+
+- `/admin/login` is the sign-in page.
+- `/admin`, `/admin/programs`, `/admin/gallery`, `/admin/facilities`, `/admin/messages`, and `/admin/settings` require a Supabase-authenticated user. Unauthenticated visits redirect to `/admin/login`; backend admin API endpoints separately validate the Supabase access token.
+
+Never add the backend `SUPABASE_SERVICE_ROLE_KEY` or `TELEGRAM_BOT_TOKEN` to Vercel frontend environment variables. Keep those secrets only on the backend host.
 
 ---
 
