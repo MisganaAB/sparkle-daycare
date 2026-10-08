@@ -32,6 +32,39 @@ export default function Footer({ settings }) {
                 </li>
               ))}
             </ul>
+            <h3 className="text-white font-semibold mt-6 mb-3">Follow Us</h3>
+            <ul className="space-y-2 text-sm">
+              <li>
+                <a
+                  href="https://www.facebook.com/people/Sparkle-Playschool/61561514316027/"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-emerald-400 transition-colors"
+                >
+                  Facebook
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.tiktok.com/@sparkle.playschool"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-emerald-400 transition-colors"
+                >
+                  TikTok
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/sparkle_playschool"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="hover:text-emerald-400 transition-colors"
+                >
+                  Instagram
+                </a>
+              </li>
+            </ul>
           </div>
 
           {/* Contact Info */}

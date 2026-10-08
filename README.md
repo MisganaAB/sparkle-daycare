@@ -353,6 +353,8 @@ npm run build
 
 Never add the backend `SUPABASE_SERVICE_ROLE_KEY` or `TELEGRAM_BOT_TOKEN` to Vercel frontend environment variables. Keep those secrets only on the backend host.
 
+The Vercel configuration also applies a Content Security Policy and security response headers to all frontend paths. If the API, Supabase project, or embedded map uses different production origins, update the relevant `connect-src`, `img-src`, or `frame-src` directives in `frontend/vercel.json` and redeploy.
+
 ---
 
 ## 12. Image Processing
