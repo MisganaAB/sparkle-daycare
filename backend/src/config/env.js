@@ -49,6 +49,15 @@ function getSupabaseUrl() {
   return url.origin;
 }
 
+function getFrontendUrl() {
+  const value = process.env.FRONTEND_URL?.trim() || 'http://localhost:5173';
+  try {
+    return new URL(value).origin;
+  } catch {
+    throw new Error('[Config Error] FRONTEND_URL must be a valid URL.');
+  }
+}
+
 export const env = {
   PORT: process.env.PORT || '5000',
   SUPABASE_URL: getSupabaseUrl(),
@@ -56,6 +65,6 @@ export const env = {
   SUPABASE_SERVICE_ROLE_KEY: getRequiredEnv('SUPABASE_SERVICE_ROLE_KEY'),
   TELEGRAM_BOT_TOKEN: process.env.TELEGRAM_BOT_TOKEN || '',
   TELEGRAM_CHAT_ID: process.env.TELEGRAM_CHAT_ID || '',
-  FRONTEND_URL: process.env.FRONTEND_URL || 'http://localhost:5173',
+  FRONTEND_URL: getFrontendUrl(),
   NODE_ENV: process.env.NODE_ENV || 'development',
 };
