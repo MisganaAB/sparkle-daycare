@@ -1,0 +1,16 @@
+# Dependencies
+node_modules/
+.env
+.env.example
+
+# Build output
+dist/
+build/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+*.swp
